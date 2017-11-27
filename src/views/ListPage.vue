@@ -1,25 +1,35 @@
 <template>
   <div>
-      <v-top></v-top>
-      <v-list></v-list>
-      <v-bottom></v-bottom>
+      <top-nav></top-nav>
+      <div class="container">
+        <div class="list-wrapper">
+          <list></list>
+        </div>
+      </div>
+      <bottom-nav></bottom-nav>
   </div>
 </template>
 
 <script>
-import vTop from "../components/top";
-import vBottom from "../components/bottom";
-import vList from "../components/list";
+import topNav from "../components/top";
+import bottomNav from "../components/bottom";
+import list from "../components/list";
 
 export default {
   name: "ListPage",
-  components: { vTop, vBottom, vList },
+  components: { topNav, bottomNav, list },
   data() {
     return {};
   }
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.container {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.list-wrapper{
+  padding: 30px;
+}
 </style>

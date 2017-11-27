@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 body,
 ul {
   margin: 0;
