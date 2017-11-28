@@ -1,15 +1,15 @@
 <template>
   <div class="bottom">
     <ul class="bottom-list">
-        <li class="active">
-            <a href="#">主页</a>
-        </li>
-        <li>
-            <a href="#">发现</a>
-        </li>
-        <li>
-            <a href="#">设置</a>
-        </li>
+      <router-link to="/" tag='li' active-class="active" exact>
+        <a>主页</a>
+      </router-link>
+      <router-link :to="{ name: 'list'}" tag='li' active-class="active" exact>
+        <a>发现</a>
+      </router-link>
+      <router-link to="/" tag='li' active-class="active" exact>
+        <a>设置</a>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -24,10 +24,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @function calculate-width ($col-span) {
-    @return 100% / $col-span
-};
+  @return 100% / $col-span;
+}
 
 .bottom {
   position: fixed;

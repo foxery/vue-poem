@@ -10,7 +10,7 @@
       <div class="avatar" style="background-image:url(/src/assets/avatar.jpg);"></div>
       <div class="info-name">诗人名</div>
       <div class="info-time">朝代</div>
-      <a href="/list" class="start">进入</a>
+      <router-link :to="{ name: 'list'}">进入</router-link>
   </div>
 </template>
 

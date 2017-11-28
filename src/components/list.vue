@@ -1,18 +1,11 @@
 <template>
   <div>
     <ul class="list">
-        <li>
-            <div class="list-left" style="background-image: url('/src/assets/list.jpg');"></div>
+        <li v-for="item in items">
+            <div class="list-left" :style="{'background-image': 'url('+item.image+')'}"></div>
             <div class="list-right">
-                <div class="title">文章标题</div>
-                <div class="time">时间</div>
-            </div>
-        </li>
-        <li>
-            <div class="list-left" style="background-image: url('/src/assets/list.jpg');"></div>
-            <div class="list-right">
-                <div class="title">文章标题</div>
-                <div class="time">时间</div>
+                <div class="title">{{item.title}}</div>
+                <div class="time">{{item.time}}</div>
             </div>
         </li>
     </ul>
@@ -24,6 +17,12 @@ export default {
   name: "list",
   data() {
     return {};
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>

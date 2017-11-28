@@ -3,7 +3,7 @@
       <top-nav></top-nav>
       <div class="container">
         <div class="list-wrapper">
-          <list></list>
+          <list :items="listData"></list>
         </div>
       </div>
       <bottom-nav></bottom-nav>
@@ -19,7 +19,43 @@ export default {
   name: "ListPage",
   components: { topNav, bottomNav, list },
   data() {
-    return {};
+    return {
+      data: [
+        {
+          categoryId: 1,
+          data: [
+            { image: "/src/assets/list.jpg", title: "唐诗1", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "唐诗2", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "唐诗3", time: "2017.11.28" }
+          ]
+        },
+        {
+          categoryId: 2,
+          data: [
+            { image: "/src/assets/list.jpg", title: "宋词1", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "宋词2", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "宋词3", time: "2017.11.28" }
+          ]
+        },
+        {
+          categoryId: 3,
+          data: [
+            { image: "/src/assets/list.jpg", title: "诗经1", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "诗经2", time: "2017.11.28" },
+            { image: "/src/assets/list.jpg", title: "诗经3", time: "2017.11.28" }
+          ]
+        }
+      ]
+    };
+  },
+  computed: {
+    listData: function() {
+      for (var i = 0; i < this.data.length; i++) {
+        if (this.$route.params.id == this.data[i].categoryId) {
+          return this.data[i].data;
+        }
+      }
+    }
   }
 };
 </script>
@@ -29,7 +65,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 60px;
 }
-.list-wrapper{
+.list-wrapper {
   padding: 30px;
 }
 </style>

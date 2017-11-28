@@ -1,15 +1,9 @@
 <template>
   <div class="header">
     <ul class="top-list">
-        <li class="active">
-            <a href="#">唐诗</a>
-        </li>
-        <li>
-            <a href="#">宋词</a>
-        </li>
-        <li>
-            <a href="#">诗经</a>
-        </li>
+      <li v-for="item in items">
+        <router-link :to="{ name: 'list', params: { id: item.id }}" active-class="active" exact>{{item.category}}</router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -18,7 +12,13 @@
 export default {
   name: "topNav",
   data() {
-    return {};
+    return {
+      items: [
+        { category: "唐诗", id: 1 },
+        { category: "宋词", id: 2 },
+        { category: "诗经", id: 3 }
+      ]
+    };
   }
 };
 </script>
@@ -52,6 +52,14 @@ export default {
         display: inline-block;
         border-bottom: 2px solid #06cf8a;
         line-height: 55px;
+      }
+    }
+    a{
+      &.active{
+        display: inline-block;
+        border-bottom: 2px solid #06cf8a;
+        line-height: 55px;
+        color: #505761;
       }
     }
   }

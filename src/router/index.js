@@ -15,9 +15,14 @@ export default new Router({
       component: Index
     },
     {
-      path: '/list',
+      path: '/list/:id',
       name: 'list',
-      component: ListPage
+      component: ListPage,
+      // children:{
+      //   path: '',
+      //   name: 'listChild',
+      //   component: ListPage,
+      // }
     },
     {
       path: '/list/detail',
