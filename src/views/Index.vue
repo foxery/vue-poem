@@ -10,15 +10,18 @@
       <div class="avatar" style="background-image:url(/src/assets/avatar.jpg);"></div>
       <div class="info-name">诗人名</div>
       <div class="info-time">朝代</div>
-      <router-link :to="{ name: 'list'}">进入</router-link>
+      <router-link :to="{ name: 'list'}" class="start">进入</router-link>
   </div>
 </template>
 
 <script>
+import bus from "../views/bus";
+
 export default {
   name: "",
   data() {
-    return {};
+    return {
+    };
   }
 };
 </script>
@@ -63,11 +66,11 @@ export default {
   color: #666;
   margin-top: 5px;
 }
-.start{
-    font-size: 14px;
-    color: #547774;
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
+.start {
+  font-size: 14px;
+  color: #547774;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
 }
 </style>

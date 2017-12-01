@@ -15,7 +15,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/list/:id',
+      path: '/list',
       name: 'list',
       component: ListPage,
       // children:{

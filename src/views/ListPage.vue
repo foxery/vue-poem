@@ -14,6 +14,7 @@
 import topNav from "../components/top";
 import bottomNav from "../components/bottom";
 import list from "../components/list";
+import bus from "../views/bus";
 
 export default {
   name: "ListPage",
@@ -50,12 +51,16 @@ export default {
   },
   computed: {
     listData: function() {
-      for (var i = 0; i < this.data.length; i++) {
-        if (this.$route.params.id == this.data[i].categoryId) {
-          return this.data[i].data;
-        }
-      }
+      // for (var i = 0; i < this.data.length; i++) {
+      //   if (this.$route.params.id == this.data[i].categoryId) {
+      //     return this.data[i].data;
+      //   }
+      // }
+      return this.data[0].data;
     }
+  },
+  methods:{
+    
   }
 };
 </script>

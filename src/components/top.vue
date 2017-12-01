@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <ul class="top-list">
-      <li v-for="item in items">
-        <router-link :to="{ name: 'list', params: { id: item.id }}" active-class="active" exact>{{item.category}}</router-link>
+      <li v-for="item in items" @click="setActive(item.category)" :class="{active: activeName == item.category}">
+        <a>{{item.category}}</a>
       </li>
     </ul>
   </div>
@@ -17,8 +17,14 @@ export default {
         { category: "唐诗", id: 1 },
         { category: "宋词", id: 2 },
         { category: "诗经", id: 3 }
-      ]
+      ],
+      activeName: ""
     };
+  },
+  methods: {
+    setActive: function(name) {
+      this.activeName = name;
+    }
   }
 };
 </script>
@@ -54,8 +60,8 @@ export default {
         line-height: 55px;
       }
     }
-    a{
-      &.active{
+    a {
+      &.active {
         display: inline-block;
         border-bottom: 2px solid #06cf8a;
         line-height: 55px;
