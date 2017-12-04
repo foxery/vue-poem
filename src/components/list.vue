@@ -1,13 +1,15 @@
 <template>
   <div>
     <ul class="list">
-        <li v-for="item in items">
+      <li v-for="item in items">
+        <router-link :to="{ name: 'listDetail', params: { id:item.id  }}" class="block">
             <div class="list-left" :style="{'background-image': 'url('+item.image+')'}"></div>
             <div class="list-right">
                 <div class="title">{{item.title}}</div>
                 <div class="time">{{item.time}}</div>
             </div>
-        </li>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -23,11 +25,15 @@ export default {
       type: Array,
       required: true
     }
-  }
+  },
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
+.block {
+  display: block;
+}
 .list-left {
   float: left;
   width: 100px;
@@ -62,6 +68,16 @@ export default {
     }
     &:after {
       clear: both;
+    }
+    a {
+      &:before,
+      &:after {
+        content: " ";
+        display: table;
+      }
+      &:after {
+        clear: both;
+      }
     }
     + li {
       margin-top: 30px;

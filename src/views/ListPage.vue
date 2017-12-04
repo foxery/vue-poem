@@ -25,42 +25,40 @@ export default {
         {
           categoryId: 1,
           data: [
-            { image: "/src/assets/list.jpg", title: "唐诗1", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "唐诗2", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "唐诗3", time: "2017.11.28" }
+            { image: "/src/assets/list.jpg", title: "唐诗1", time: "2017.11.28",id:1 },
+            { image: "/src/assets/list.jpg", title: "唐诗2", time: "2017.11.28",id:2 },
+            { image: "/src/assets/list.jpg", title: "唐诗3", time: "2017.11.28",id:3 }
           ]
         },
         {
           categoryId: 2,
           data: [
-            { image: "/src/assets/list.jpg", title: "宋词1", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "宋词2", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "宋词3", time: "2017.11.28" }
+            { image: "/src/assets/list.jpg", title: "宋词1", time: "2017.11.28",id:4 },
+            { image: "/src/assets/list.jpg", title: "宋词2", time: "2017.11.28",id:5 },
+            { image: "/src/assets/list.jpg", title: "宋词3", time: "2017.11.28",id:6 }
           ]
         },
         {
           categoryId: 3,
           data: [
-            { image: "/src/assets/list.jpg", title: "诗经1", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "诗经2", time: "2017.11.28" },
-            { image: "/src/assets/list.jpg", title: "诗经3", time: "2017.11.28" }
+            { image: "/src/assets/list.jpg", title: "诗经1", time: "2017.11.28",id:7 },
+            { image: "/src/assets/list.jpg", title: "诗经2", time: "2017.11.28",id:8 },
+            { image: "/src/assets/list.jpg", title: "诗经3", time: "2017.11.28",id:9 }
           ]
         }
-      ]
+      ],
+      listData: []
     };
   },
-  computed: {
-    listData: function() {
-      // for (var i = 0; i < this.data.length; i++) {
-      //   if (this.$route.params.id == this.data[i].categoryId) {
-      //     return this.data[i].data;
-      //   }
-      // }
-      return this.data[0].data;
-    }
-  },
-  methods:{
-    
+  created: function() {
+    var me = this;
+    bus.$on("selected-categoryid", function(id) {
+      for (var i = 0; i < me.data.length; i++) {
+        if (id == me.data[i].categoryId) {
+          me.listData = me.data[i].data;
+        }
+      }
+    });
   }
 };
 </script>

@@ -17,15 +17,10 @@ export default new Router({
     {
       path: '/list',
       name: 'list',
-      component: ListPage,
-      // children:{
-      //   path: '',
-      //   name: 'listChild',
-      //   component: ListPage,
-      // }
+      component: ListPage
     },
     {
-      path: '/list/detail',
+      path: '/list/detail/:id',
       name: 'listDetail',
       component: ListDetail
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <ul class="top-list">
-      <li v-for="item in items" @click="setActive(item.category)" :class="{active: activeName == item.category}">
+      <li v-for="item in items" @click="setActive(item.category,item.id)" :class="{active: activeName == item.category}">
         <a>{{item.category}}</a>
       </li>
     </ul>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import bus from "../views/bus";
 export default {
   name: "topNav",
   data() {
@@ -18,12 +19,24 @@ export default {
         { category: "宋词", id: 2 },
         { category: "诗经", id: 3 }
       ],
-      activeName: ""
+      activeName: "",
+      activeId: null
     };
   },
+  created: function() {
+    // 默认选择第一个
+    this.activeName = this.items[0].category;
+    this.activeId = this.items[0].id;
+    this.setCurId();
+  },
   methods: {
-    setActive: function(name) {
+    setActive: function(name, id) {
       this.activeName = name;
+      this.activeId = id;
+      this.setCurId();
+    },
+    setCurId: function() {
+      bus.$emit("selected-categoryid", this.activeId);
     }
   }
 };
