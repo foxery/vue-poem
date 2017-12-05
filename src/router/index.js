@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import ListPage from '@/views/ListPage'
 import ListDetail from '@/views/ListDetail'
 import Index from '@/views/Index'
+import Profile from '@/views/Profile'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/list/detail/:id',
       name: 'listDetail',
       component: ListDetail
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     }
   ]
 })

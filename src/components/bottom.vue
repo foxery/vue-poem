@@ -7,7 +7,7 @@
       <router-link :to="{ name: 'list'}" tag='li' active-class="active" exact>
         <a>发现</a>
       </router-link>
-      <router-link to="/" tag='li' active-class="active" exact>
+      <router-link :to="{ name: 'profile'}" tag='li' active-class="active" exact>
         <a>设置</a>
       </router-link>
     </ul>
