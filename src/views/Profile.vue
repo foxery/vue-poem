@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="valign-wrapper">
         <div class="valign">
-          <div class="time">{{time.hour}}:{{time.minute}}:{{time.second}}</div>
+          <div class="time">{{tweenedNowTime.hour}}:{{tweenedNowTime.minute}}:{{tweenedNowTime.second}}</div>
           <img src="/src/assets/ghost.png" alt="">
         </div>
       </div>
@@ -24,14 +24,16 @@ export default {
   data() {
     return {
       time: {
-        hour: "00",
-        minute: "00",
-        second: "00"
-      }
+        hour: 0,
+        minute: 0,
+        second: 0
+      },
+      tweenedTime: {}
     };
   },
   created: function() {
     this.updateTime();
+    this.tweenedTime = Object.assign({}, this.time);
   },
   methods: {
     drawWave: function() {
@@ -40,44 +42,54 @@ export default {
       wave("myCanvas3", 460, 180, 580, 300, 180);
       cloud();
     },
-    tween: function(startValue, endValue) {
-      var vm = this;
-      function animate() {
-        if (TWEEN.update()) {
-          requestAnimationFrame(animate);
-        }
-      }
-
-      new TWEEN.Tween({ tweeningValue: startValue })
-        .to({ tweeningValue: endValue }, 500)
-        .onUpdate(function() {
-          vm.tweeningValue = this.tweeningValue.toFixed(0);
-        })
-        .start();
-
-      animate();
-    },
     updateTime: function() {
       var now = new Date();
       var nowHour = now.getHours();
       var nowMin = now.getMinutes();
       var nowSec = now.getSeconds();
-      this.time.hour = nowHour;
-      this.time.minute = nowMin;
-      this.time.second = nowSec;
+      this.time = {
+        hour: nowHour,
+        minute: nowMin,
+        second: nowSec
+      };
       setTimeout(() => {
         this.updateTime();
       }, 1000);
     },
-    formatTime:function(){
-      
+    formatTime: function(val) {
+      if (+val < 10) {
+        return "0" + val;
+      } else {
+        return +val;
+      }
     }
   },
   mounted: function() {
     // 在created时捕获不到canvas
     this.drawWave();
   },
-  computed: {}
+  computed: {
+    tweenedNowTime: function() {
+      return {
+        hour: this.formatTime(this.tweenedTime.hour.toFixed(0)),
+        minute: this.formatTime(this.tweenedTime.minute.toFixed(0)),
+        second: this.formatTime(this.tweenedTime.second.toFixed(0))
+      };
+    }
+  },
+  watch: {
+    time: function() {
+      function animate() {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      new TWEEN.Tween(this.tweenedTime).to(this.time, 750).start();
+
+      animate();
+    }
+  }
 };
 
 function wave(elementId, startH, a, b, c, d) {
