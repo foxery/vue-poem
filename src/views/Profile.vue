@@ -3,13 +3,13 @@
     <div class="banner">
       <div class="valign-wrapper">
         <div class="valign">
-          <div class="time">00:00:00</div>
+          <div class="time">{{time.hour}}:{{time.minute}}:{{time.second}}</div>
           <img src="/src/assets/ghost.png" alt="">
         </div>
       </div>
-          <canvas id="myCanvas1" class="canvas"></canvas>
-          <canvas id="myCanvas2" class="canvas"></canvas>
-          <canvas id="myCanvas3" class="canvas"></canvas>
+          <canvas id="myCanvas1" class="canvas size"></canvas>
+          <canvas id="myCanvas2" class="canvas size"></canvas>
+          <canvas id="myCanvas3" class="canvas size"></canvas>
           <canvas id="myCanvas4" class="canvas"></canvas>
     </div>
   </div>
@@ -17,28 +17,67 @@
 
 <script>
 import $ from "jquery";
+const TWEEN = require("@tweenjs/tween.js");
 
 export default {
   name: "Profile",
   data() {
-    return {};
+    return {
+      time: {
+        hour: "00",
+        minute: "00",
+        second: "00"
+      }
+    };
   },
-  created: function() {},
+  created: function() {
+    this.updateTime();
+  },
   methods: {
     drawWave: function() {
       wave("myCanvas1", 420, 170, 300, 120, 620);
       wave("myCanvas2", 500, 280, 180, 250, 620);
       wave("myCanvas3", 460, 180, 580, 300, 180);
-      // var x0 = 500 * Math.random() + 50;
-      // var y0 = 200 * Math.random() + 50;
-      // var c0 = 100 * Math.random() + 50;
       cloud();
+    },
+    tween: function(startValue, endValue) {
+      var vm = this;
+      function animate() {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      new TWEEN.Tween({ tweeningValue: startValue })
+        .to({ tweeningValue: endValue }, 500)
+        .onUpdate(function() {
+          vm.tweeningValue = this.tweeningValue.toFixed(0);
+        })
+        .start();
+
+      animate();
+    },
+    updateTime: function() {
+      var now = new Date();
+      var nowHour = now.getHours();
+      var nowMin = now.getMinutes();
+      var nowSec = now.getSeconds();
+      this.time.hour = nowHour;
+      this.time.minute = nowMin;
+      this.time.second = nowSec;
+      setTimeout(() => {
+        this.updateTime();
+      }, 1000);
+    },
+    formatTime:function(){
+      
     }
   },
   mounted: function() {
     // 在created时捕获不到canvas
     this.drawWave();
-  }
+  },
+  computed: {}
 };
 
 function wave(elementId, startH, a, b, c, d) {
@@ -99,9 +138,12 @@ function cloud() {
   canvas.height = h;
   var ctx = canvas.getContext("2d");
 
-  var x = 500 * Math.random() + 50;
-  var y = 200 * Math.random() + 50;
-  var w = 100 * Math.random() + 50;
+  // var x = 300 * Math.random() + 50;
+  // var y = 500 * Math.random() + 50;
+  // var w = 100 * Math.random() + 50;
+  var x = 50,
+    y = 450,
+    w = 80;
 
   //云朵移动范围即画布宽度
   var maxWidth = window.screen.width;
@@ -119,7 +161,8 @@ function cloud() {
   grd.addColorStop(1, "rgba(255,255,255,0.5)");
   ctx.fillStyle = grd;
 
-  ctx.arc(x, y, w * 0.19, 0, 360, false);
+  // x,y,r,sAngle,eAngle,counterclockwise
+  ctx.arc(x, y, w * 0.25, 0, 2 * Math.PI, false);
   ctx.arc(x + w * 0.08, y - ch * 0.3, w * 0.11, 0, 360, false);
   ctx.arc(x + w * 0.3, y - ch * 0.25, w * 0.25, 0, 360, false);
   ctx.arc(x + w * 0.6, y, w * 0.21, 0, 360, false);
@@ -157,7 +200,9 @@ function cloud() {
 .canvas {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 140px;
+  &.size {
+    width: 100%;
+    height: 140px;
+  }
 }
 </style>
