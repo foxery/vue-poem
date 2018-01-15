@@ -4,6 +4,7 @@ import ListPage from '@/views/ListPage'
 import ListDetail from '@/views/ListDetail'
 import Index from '@/views/Index'
 import Profile from '@/views/Profile'
+import Test from '@/views/Test'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     }
   ]
 })

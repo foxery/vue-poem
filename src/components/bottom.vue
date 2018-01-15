@@ -10,6 +10,9 @@
       <router-link :to="{ name: 'profile'}" tag='li' active-class="active" exact>
         <a>设置</a>
       </router-link>
+      <router-link :to="{ name: 'test'}" tag='li' active-class="active" exact>
+        <a>测试</a>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -47,7 +50,7 @@ export default {
     float: left;
     margin: 0;
     padding: 0 15px;
-    width: calculate-width(3);
+    width: calculate-width(4);
     &.active {
       color: #505761;
       a {

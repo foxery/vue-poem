@@ -12,6 +12,31 @@
           <canvas id="myCanvas3" class="canvas size"></canvas>
           <canvas id="myCanvas4" class="canvas"></canvas>
     </div>
+    <!-- nav -->
+    <div>
+      <ul class="nav">
+        <li class="active"><a>发表</a></li>
+      </ul>
+    </div>
+    <div class="divider"></div>
+    <div class="content">
+      <input type="text" class="post-title">
+      <div class="post-wrapper">
+        <textarea></textarea>
+        <div class="post-bar">
+          <a class="btn">发表</a>
+        </div>
+      </div>
+      <div class="title">我发表的文章列表</div>
+      <div class="list-content">
+        <div class="list-info">
+          <span class="list-info-title">文章标题</span>
+          <span> - 文章分类</span>
+          <span class="flo-r">发表时间</span>
+        </div>
+        <div class="list-text">文章内容</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -215,6 +240,126 @@ function cloud() {
   &.size {
     width: 100%;
     height: 140px;
+  }
+}
+.nav {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  > li {
+    float: left;
+    display: block;
+    width: 25%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #d1d1d1;
+    font-size: 14px;
+    text-align: center;
+    img {
+      width: 100%;
+    }
+    > a {
+      color: #d1d1d1;
+      display: inline-block;
+    }
+    &.active {
+      > a {
+        color: #98c0bd;
+        border-bottom: 2px solid #98c0bd;
+      }
+    }
+  }
+}
+.divider {
+  width: 100%;
+  height: 30px;
+  background-color: #f2f7f1;
+}
+.content {
+  padding: 20px;
+}
+.post-wrapper {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+  textarea {
+    display: block;
+    width: 100%;
+    height: 100px;
+    border: none;
+    padding: 5px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.post-bar {
+  width: 100%;
+  height: 35px;
+  background-color: #f9fafb;
+  line-height: 35px;
+  text-align: right;
+  .btn {
+    display: inline-block;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fff;
+    background-color: #5bb7ed;
+    font-size: 14px;
+  }
+}
+.title {
+  font-size: 12px;
+  color: #bcbdc1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.list-content {
+  padding: 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+.list-info {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  font-size: 12px;
+  color: #d9d6df;
+}
+.flo-r {
+  float: right;
+}
+.list-info-title {
+  font-size: 14px;
+  color: #6fbce7;
+}
+.list-text {
+  font-size: 12px;
+  color: #d9d6df;
+  margin-top: 15px;
+}
+.post-title {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  display: block;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  border: none;
+  margin-bottom: 10px;
+  &:focus {
+    outline: none;
   }
 }
 </style>
