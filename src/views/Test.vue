@@ -31,6 +31,11 @@ export default {
         }
       ]
     };
+  },
+  created:function(){
+    document.addEventListener('click', (e) => {
+       console.log("test...");
+   })
   }
 };
 </script>

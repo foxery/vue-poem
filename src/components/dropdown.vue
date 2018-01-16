@@ -1,20 +1,26 @@
 <template>
   <div>
       <div class="dropdown-wrapper">
-        <div class="dropdown-selected" :class="{ show: isActive }" @click="SetActive">测试按钮</div>
+        <div class="dropdown-selected" :class="{ show: isActive }" @click="SetActive">{{selected.Name}}</div>
         <ul class="dropdown-list">
-            <li v-for="item in items">{{item.Name}}</li>
+            <li v-for="item in items" @click="SelectLi(item.Name)">{{item.Name}}</li>
         </ul>
       </div>
   </div>
 </template>
 
 <script>
+import $ from "jquery";
+import bus from "../views/bus";
 export default {
   name: "",
   data() {
     return {
-      isActive: false
+      isActive: false,
+      selected: {
+        Id: 0,
+        Name: this.items[0].Name
+      }
     };
   },
   props: {
@@ -24,9 +30,20 @@ export default {
     }
   },
   methods: {
-    SetActive: function() {
+    SetActive: function(event) {
       this.isActive = !this.isActive;
+    },
+    SelectLi: function(val) {
+      this.selected.Name = val;
+      this.SetActive();
     }
+  },
+  created:function(){
+    document.addEventListener('click', (e) => {
+       if (!this.$el.contains(e.target)){
+         this.isActive = false
+       } 
+   })
   }
 };
 </script>
